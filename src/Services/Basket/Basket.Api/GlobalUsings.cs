@@ -9,3 +9,4 @@ global using BuildingBlocks.Exceptions.Handler;
 global using Marten;
 global using Basket.Api.Exceptions;
 global using BuildingBlocks.Exceptions;
+global using Basket.Api.Data;

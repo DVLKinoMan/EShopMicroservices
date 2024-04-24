@@ -1,6 +1,4 @@
-﻿using Basket.Api.Data;
-
-namespace Basket.Api.Basket.GetBasket
+﻿namespace Basket.Api.Basket.GetBasket
 {
     public record GetBasketQuery(string UserName) : IQuery<GetBasketResult>;
     public record GetBasketResult(ShoppingCart Cart);
@@ -11,7 +9,7 @@ namespace Basket.Api.Basket.GetBasket
     {
         public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
         {
-            var basket = await repository.GetBasket(query.UserName);
+            var basket = await repository.GetBasket(query.UserName, cancellationToken);
 
             return new GetBasketResult(basket);
         }
