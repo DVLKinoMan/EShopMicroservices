@@ -17,6 +17,10 @@
             private set { }
         }
 
+        protected Order()
+        {
+        }
+
         public Order(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status, decimal totalPrice)
         {
             //_orderItems = orderItems;
