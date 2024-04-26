@@ -16,5 +16,63 @@
             get => OrderItems.Sum(x => x.Price * x.Quantity);
             private set { }
         }
+
+        public Order(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status, decimal totalPrice)
+        {
+            //_orderItems = orderItems;
+            Id = id;
+            CustomerId = customerId;
+            OrderName = orderName;
+            ShippingAddress = shippingAddress;
+            BillingAddress = billingAddress;
+            Payment = payment;
+            Status = status;
+            TotalPrice = totalPrice;
+        }
+
+        public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status, decimal totalPrice)
+        {
+            var order = new Order(
+                id,
+                customerId,
+                orderName,
+                shippingAddress,
+                billingAddress,
+                payment,
+                status,
+                totalPrice
+            );
+
+            order.AddDomainEvent(new OrderCreatedEvent(order));
+
+            return order;
+        }
+
+        public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
+        {
+            OrderName = orderName;
+            ShippingAddress = shippingAddress;
+            BillingAddress = billingAddress;
+            Payment = payment;
+            Status = status;
+
+            AddDomainEvent(new OrderUpdatedEvent(this));
+        }
+
+        public void Add(ProductId productId, int quantity, decimal price)
+        {
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
+
+            var oderItem = new OrderItem(Id, productId, quantity, price);
+            _orderItems.Add(oderItem);
+        }
+
+        public void Remove(ProductId productId)
+        {
+            var orderItem = _orderItems.FirstOrDefault(x => x.ProductId == productId);
+            if (orderItem != null)
+                _orderItems.Remove(orderItem);
+        }
     }
 }
