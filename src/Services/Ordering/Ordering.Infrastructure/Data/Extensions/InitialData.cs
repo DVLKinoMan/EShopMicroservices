@@ -49,7 +49,7 @@ namespace Ordering.Infrastructure.Data.Extensions
                 order2.Add(ProductId.Of(new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8")), 1, 650);
                 order2.Add(ProductId.Of(new Guid("6ec1297b-ec0a-4aa1-be25-6726e3b51a27")), 2, 450);
 
-                return new List<Order> { order1, order2 };
+                return [order1, order2];
             }
         }
     }
