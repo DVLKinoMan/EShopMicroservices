@@ -21,7 +21,7 @@
         {
         }
 
-        public Order(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status, decimal totalPrice)
+        public Order(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
         {
             //_orderItems = orderItems;
             Id = id;
@@ -30,11 +30,9 @@
             ShippingAddress = shippingAddress;
             BillingAddress = billingAddress;
             Payment = payment;
-            Status = status;
-            TotalPrice = totalPrice;
         }
 
-        public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status, decimal totalPrice)
+        public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
         {
             var order = new Order(
                 id,
@@ -42,9 +40,7 @@
                 orderName,
                 shippingAddress,
                 billingAddress,
-                payment,
-                status,
-                totalPrice
+                payment
             );
 
             order.AddDomainEvent(new OrderCreatedEvent(order));
