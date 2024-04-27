@@ -1,6 +1,4 @@
-﻿using Ordering.Application.Extensions;
-
-namespace Ordering.Application.Orders.Queries
+﻿namespace Ordering.Application.Orders.Queries.GetOrdersByName
 {
     public class GetOrdersByNameQueryHandler
         (IApplicationDbContext dbContext)
