@@ -3,7 +3,10 @@
     public static class OrderExtensions
     {
         public static IEnumerable<OrderDto> ToOrderDtos(this IEnumerable<Order> orders)
-            => orders.Select(order => new OrderDto(
+            => orders.Select(order => order.ToOrderDto());
+
+        public static OrderDto ToOrderDto(this Order order)
+            => new(
                 Id: order.Id.Value,
                 CustomerId: order.CustomerId.Value,
                 OrderName: order.OrderName.Value,
@@ -12,6 +15,6 @@
                 Payment: new PaymentDto(order.Payment.CardName!, order.Payment.CardNumber, order.Payment.Expiration, order.Payment.CVV, order.Payment.PaymentMethod),
                 Status: order.Status,
                 OrderItems: order.OrderItems.Select(oi => new OrderItemDto(oi.OrderId.Value, oi.ProductId.Value, oi.Quantity, oi.Price)).ToList()
-             ));
+             );
     }
 }
