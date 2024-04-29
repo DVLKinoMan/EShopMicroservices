@@ -5,10 +5,10 @@
         [Get("/ordering-service/orders?pageIndex={pageIndex}&pageSize={pageSize}")]
         Task<GetOrdersResponse> GetOrders(int? pageIndex = 1, int? pageSize = 10);
 
-        [Post("/ordering-service/orders/{orderName}")]
+        [Get("/ordering-service/orders/{orderName}")]
         Task<GetOrdersByNameResponse> GetOrdersByName(string orderName);
 
-        [Delete("/ordering-service/orders/customer/{customerId}")]
+        [Get("/ordering-service/orders/customer/{customerId}")]
         Task<GetOrdersByCustomerResponse> GetOrdersByCustomer(Guid customerId);
     }
 }
